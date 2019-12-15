@@ -1,27 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+
+using RT.AOC2019.Core.Models;
 
 namespace RT.AOC2019.CMD.Day1
 {
-    public static class Part2
+    public class Part2 : Part
     {
-        public static async Task Run()
+        public Part2() : base(2, 1, "./Day1/Data.txt")
         {
-            Console.WriteLine("Day1: Part2");
-            TextExample();
-            var fueles = (await LoadData()).Select(x => CalulateFuelForFuel(x));
-            var total = (int)fueles.Sum();
-            Console.WriteLine($"Result: {total}");
         }
 
-        public static void TextExample()
+        protected override string LoadTestData()
         {
-            var mass = 100756;
-            var fuel = (int)CalulateFuelForFuel(mass);
-            Console.WriteLine($"TEST: fuel needed: {fuel}");
+            return "100756";
+        }
+
+        protected override string Work(string data)
+        {
+            var input = data.Split(Environment.NewLine).Select(x => double.Parse(x));
+            var fueles = (input).Select(x => CalulateFuelForFuel(x));
+            var total = fueles.Sum();
+            return total.ToString();
         }
 
         private static double CalulateFuelForFuel(double fuel)
@@ -32,12 +32,6 @@ namespace RT.AOC2019.CMD.Day1
                 return extraFuel + CalulateFuelForFuel(extraFuel);
             }
             return 0;
-        }
-
-        private static async Task<IEnumerable<double>> LoadData()
-        {
-            var input = await File.ReadAllTextAsync("./Day1/Part1.Data.txt");
-            return input.Split(Environment.NewLine).Select(x => double.Parse(x));
         }
     }
 }

@@ -1,35 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+
+using RT.AOC2019.Core.Models;
 
 namespace RT.AOC2019.CMD.Day2
 {
-    public static class Part1
+    public class Part1 : Part
     {
-        public static async Task Run()
+        public Part1() : base(1, 2, "./Day2/Data.txt")
         {
-            Console.WriteLine("Day2: Part1");
-            Test();
-            var code = await LoadData();
-            // initial manupliations
-            code[1] = 12;
-            code[2] = 2;
-
-            InterpetateCode(ref code, 0);
-
-            Console.WriteLine($"Result: ${code[0]}");
         }
 
-        public static void Test()
+        protected override string LoadTestData()
         {
-            Console.WriteLine("Testing Provided Example");
-            var code = new int[] { 1, 9, 10, 3, 2, 3, 11, 0, 99, 30, 40, 50 };
+            return "1,9,10,3,2,3,11,0,99,30,40,50";
+        }
 
+        protected override string Work(string data)
+        {
+            var code = data.Split(',').Select(x => int.Parse(x)).ToArray();
+            if (data != LoadTestData())
+            {
+                // initial manupliations
+                code[1] = 12;
+                code[2] = 2;
+            }
             InterpetateCode(ref code, 0);
-
-            Console.WriteLine($"TEST: result = {string.Join(',', code)}");
+            return code[0].ToString();
         }
 
         private static void InterpetateCode(ref int[] array, int pos)
@@ -42,14 +39,17 @@ namespace RT.AOC2019.CMD.Day2
                     case (1):
                         Add(ref array, pos);
                         break;
+
                     case (2):
                         Multiply(ref array, pos);
                         break;
+
                     case (99):
                         exit = true;
                         break;
+
                     default:
-                        throw new NotSupportedException($"not a valid int code! {array[pos]}");                      
+                        throw new NotSupportedException($"not a valid int code! {array[pos]}");
                 }
                 pos += 4;
             }
@@ -63,18 +63,12 @@ namespace RT.AOC2019.CMD.Day2
             array[outputPosition] = array[input1] * array[input2];
         }
 
-            private static void Add(ref int[] array, int pos)
+        private static void Add(ref int[] array, int pos)
         {
             var input1 = array[pos + 1];
             var input2 = array[pos + 2];
             var outputPosition = array[pos + 3];
             array[outputPosition] = array[input1] + array[input2];
-        }
-
-        private static async Task<int[]> LoadData()
-        {
-            var input = await File.ReadAllTextAsync("./Day2/Part1.Data.txt");
-            return input.Split(',').Select(x => int.Parse(x)).ToArray();
         }
     }
 }

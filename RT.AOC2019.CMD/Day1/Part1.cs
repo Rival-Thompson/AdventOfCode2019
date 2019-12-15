@@ -1,25 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+
+using RT.AOC2019.Core.Models;
 
 namespace RT.AOC2019.CMD.Day1
 {
-    public static class Part1
+    public class Part1 : Part
     {
-        public static async Task Run()
+        public Part1() : base(1, 1, "./Day1/Data.txt")
         {
-            Console.WriteLine("Day1: Part1");
-            var fueles =(await LoadData()).Select(x => ((int)Math.Round(x / 3,MidpointRounding.ToZero)) - 2);
-            var total = fueles.Sum();
-            Console.WriteLine($"Result: ${total}");
         }
 
-        private static async Task<IEnumerable<double>> LoadData()
+        protected override string LoadTestData()
         {
-            var input = await File.ReadAllTextAsync("./Day1/Part1.Data.txt");
-            return input.Split(Environment.NewLine).Select(x => double.Parse(x));
+            throw new NotImplementedException();
+        }
+
+        protected override string Work(string data)
+        {
+            var input = data.Split(Environment.NewLine).Select(x => double.Parse(x));
+            var fueles = (input).Select(x => ((int)Math.Round(x / 3, MidpointRounding.ToZero)) - 2);
+            var total = fueles.Sum();
+            return total.ToString();
         }
     }
 }

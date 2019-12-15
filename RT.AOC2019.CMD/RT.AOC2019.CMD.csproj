@@ -6,8 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Day1\" />
-    <Folder Include="Day2\" />
     <Folder Include="Day3\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
@@ -15,7 +13,13 @@
     <None Remove="Day1 %28copy%29\Part1.Data.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Day1\Part1.Data.txt">
+    <ProjectReference Include="..\RT.AOC2019.Core\RT.AOC2019.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Day1\Data.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Day2\Data.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Day2\Part1.Data.txt">
