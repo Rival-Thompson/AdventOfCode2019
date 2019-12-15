@@ -12,7 +12,8 @@ namespace RT.AOC2019.CMD
             //await Day1.Part2.Run();
             //await Day2.Part1.Run();
             //await Day2.Part2.Run();
-            await Day3.Part1V2.Run();
+            // await Day3.Part1.Run();
+            await Day3.Part2.Run();
 
             Console.ReadLine();
         }

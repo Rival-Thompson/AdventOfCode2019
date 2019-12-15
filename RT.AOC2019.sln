@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RT.AOC2019.CMD", "RT.AOC2019.CMD\RT.AOC2019.CMD.csproj", "{91C3AA09-B3E9-4504-9119-99F1EEE03650}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RT.AOC2019.Core", "RT.AOC2019.Core\RT.AOC2019.Core.csproj", "{0552964F-918E-4AD9-8128-015B4A49E948}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{91C3AA09-B3E9-4504-9119-99F1EEE03650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91C3AA09-B3E9-4504-9119-99F1EEE03650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91C3AA09-B3E9-4504-9119-99F1EEE03650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0552964F-918E-4AD9-8128-015B4A49E948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0552964F-918E-4AD9-8128-015B4A49E948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0552964F-918E-4AD9-8128-015B4A49E948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0552964F-918E-4AD9-8128-015B4A49E948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

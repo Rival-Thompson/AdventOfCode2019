@@ -9,14 +9,14 @@ using RT.AOC2019.CMD.Extensions;
 
 namespace RT.AOC2019.CMD.Day3
 {
-    public static class Part1
+    public static class Part2
     {
         public static async Task Run()
         {
-            Console.WriteLine("Day3: Part1");
+            Console.WriteLine("Day3: Part2");
             var lines = await LoadData();
             //lines = LoadTestData();
-            var coordinateLists = lines.Select(x => LineToCoordinateList(x).Distinct().ToList());
+            var coordinateLists = lines.Select(x => LineToCoordinateList(x).Distinct().ToList()).ToList();
 
             var allCoordinates = new List<Point>();
             foreach (var list in coordinateLists)
@@ -25,13 +25,11 @@ namespace RT.AOC2019.CMD.Day3
                 allCoordinates.AddRange(list);
             }
 
-            var interSections = FindInterSections(allCoordinates);
+            var interSections = FindInterSections(allCoordinates, coordinateLists);
 
-            var distances = interSections.Select(point => new { Distance = (Math.Abs(point.X) + Math.Abs(point.Y)), Coordinate = point });
+            var closest = interSections.OrderBy(x => x.TotalSteps).First();
 
-            var closest = distances.OrderBy(x => x.Distance).First();
-
-            Console.WriteLine($"Result: {closest.Coordinate} with a distance of {closest.Distance}");
+            Console.WriteLine($"Result: {closest.Point} with a distance of {closest.TotalSteps}");
 
         }
 
@@ -81,14 +79,15 @@ namespace RT.AOC2019.CMD.Day3
             return input.Split(Environment.NewLine);
         }
 
-        private static IEnumerable<Point> FindInterSections(IEnumerable<Point> coordinates)
+        private static IEnumerable<Intersection> FindInterSections(IEnumerable<Point> coordinates, IEnumerable<IEnumerable<Point>> lists)
         {
             var sw = new Stopwatch();
             sw.Start();
-            var intersections = coordinates.Duplicates(x => x).ToList();
+            var points = coordinates.Duplicates(x => x).Distinct().ToList();
+            var intersections = points.Select(p => new Intersection(p, lists.Sum(l => l.IndexOf(p) + 1) + lists.Count()));
             sw.Stop();
             Console.WriteLine($"Finding intersections v2 took {sw.Elapsed}");
-            return intersections.Distinct();
+            return intersections;
         }
 
 
